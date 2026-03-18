@@ -16,8 +16,8 @@ def _parse_bet(amount: int, choice: str) -> ColorBet | NumberBet:
         return ColorBet(amount, Color(choice))
 
 
-scenarios("number_bet.feature")
-scenarios("color_bet.feature")
+scenarios("features/number_bet.feature")
+scenarios("features/color_bet.feature")
 
 
 # ---------------------------------------------------------------------------

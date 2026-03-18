@@ -1,0 +1,8 @@
+[submodule "pytest-bdd"]
+	path = pytest-bdd
+	url = git@github.com:nilp0inter/pytest-bdd.git
+	branch = master
+[submodule "stochastic-gherkin"]
+	path = stochastic-gherkin
+	url = git@github.com:nilp0inter/stochastic-gherkin.git
+	branch = main
