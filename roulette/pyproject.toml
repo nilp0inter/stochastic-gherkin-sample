@@ -22,6 +22,7 @@ stochastic-gherkin = { path = "../stochastic-gherkin/python", editable = true }
 
 [dependency-groups]
 dev = [
+    "pandas>=2.0",
     "pytest>=9.0.2",
     "pytest-bdd",
     "stochastic-gherkin",
