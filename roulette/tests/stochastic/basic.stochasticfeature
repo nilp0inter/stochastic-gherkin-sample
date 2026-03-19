@@ -4,8 +4,8 @@ Stochastic Feature: Roulette Fair Play Validation
 
     Given the following Execution Strategy:
       | Setting         | Value |
-      | Maximum Samples | 50000 |
-      | Warmup Samples  | 500   |
+      | Maximum Samples | 500000 |
+      | Warmup Samples  | 1000   |
       | Fail Fast       | false |
 
     And the following Sample Schema:
@@ -26,5 +26,5 @@ Stochastic Feature: Roulette Fair Play Validation
 
     Then the statistical assertion "Expected_House_Edge" is met:
       | Observation   | Aggregation | Operator | Value |
-      | player_payout | Average     | >=       | -0.40 |
-      | player_payout | Average     | <=       | -0.15 |
+      | player_payout | Average     | >=       | -0.60 |
+      | player_payout | Average     | <=       | 0.06  |

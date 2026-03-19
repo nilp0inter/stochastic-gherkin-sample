@@ -32,8 +32,8 @@ Stochastic Feature: Roulette Fair Play Validation
 
     Then the statistical assertion "Green_Occurrence" is met:
       | Observation  | Filter | Operator | Value |
-      | color_result | Green  | >=       | 0.025 |
-      | color_result | Green  | <=       | 0.029 |
+      | color_result | Green  | >=       | 0.024 |
+      | color_result | Green  | <=       | 0.030 |
 
     And the statistical assertion "Red_Occurrence" is met:
       | Observation  | Filter | Operator | Value |

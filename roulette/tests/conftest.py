@@ -45,7 +45,22 @@ def then_identify_winning(roulette_context, entity):
 @then(parsers.parse('pays the player if the winning {entity} is {target} and the bet was "{bet_choice}"'))
 def then_pays_player(roulette_context, entity, target, bet_choice, stochastic_sample):
     game = roulette_context["game"]
+
+    # Only resolve if the bet hasn't already been resolved by a prior conditional step
+    if game.bet is None:
+        return
+
+    # Check if the condition matches
+    if entity == "number":
+        match = game.winning_number == int(target)
+    else:  # color
+        match = game.COLORS[game.winning_number].value == target
+
+    if not match:
+        return
+
     net_payout = game.resolve_bet()
+    roulette_context["resolved"] = True
     stochastic_sample.observe(
         winning_number=game.winning_number,
         color_result=game.COLORS[game.winning_number].value,
@@ -55,5 +70,17 @@ def then_pays_player(roulette_context, entity, target, bet_choice, stochastic_sa
 
 
 @then("awards the bet to the house in all other cases")
-def then_house_wins():
-    pass
+def then_house_wins(roulette_context, stochastic_sample):
+    game = roulette_context["game"]
+
+    # If no prior conditional step resolved the bet, the house wins
+    if game.bet is None:
+        return
+
+    net_payout = game.resolve_bet()
+    stochastic_sample.observe(
+        winning_number=game.winning_number,
+        color_result=game.COLORS[game.winning_number].value,
+        player_payout=float(net_payout),
+        rng_seed=game.seed_used,
+    )
